@@ -1,0 +1,11 @@
+{
+  "profiles": {
+    "TabSwitchExtension (Package)": {
+      "commandName": "MsixPackage",
+      "doNotLaunchApp": true
+    },
+    "TabSwitchExtension (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
