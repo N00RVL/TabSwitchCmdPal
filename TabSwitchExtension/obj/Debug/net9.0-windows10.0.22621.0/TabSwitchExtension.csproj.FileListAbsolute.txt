@@ -1,0 +1,2 @@
+D:\CmdPalExt\TabSwitchExtension\TabSwitchExtension\obj\Debug\net9.0-windows10.0.22621.0\TabSwitchExtension.csproj.AssemblyReference.cache
+D:\CmdPalExt\TabSwitchExtension\TabSwitchExtension\obj\Debug\net9.0-windows10.0.22621.0\TabSwitchExtension.GeneratedMSBuildEditorConfig.editorconfig

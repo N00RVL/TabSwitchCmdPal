@@ -9,20 +9,19 @@ namespace TabSwitchExtension;
 
 public partial class TabSwitchExtensionCommandsProvider : CommandProvider
 {
-    private readonly ICommandItem[] _commands;
-
     public TabSwitchExtensionCommandsProvider()
     {
         DisplayName = "TabSwitch";
-        Icon = IconHelpers.FromRelativePath("Assets\\StoreLogo.png");
-        _commands = [
-            new CommandItem(new TabSwitchExtensionPage()) { Title = DisplayName },
-        ];
+        Icon = IconHelpers.FromRelativePath("Assets\\logo.png");
     }
 
     public override ICommandItem[] TopLevelCommands()
     {
-        return _commands;
+        return [
+            new CommandItem(new TabSwitchMainPage()) { Title = "TabSwitch" },
+            new CommandItem(new OpenTabsPage()) { Title = "Switch to Tab" },
+            new CommandItem(new RecentTabsPage()) { Title = "Recent Tabs" },
+            new CommandItem(new CloseTabPage()) { Title = "Close Tab" },
+        ];
     }
-
 }

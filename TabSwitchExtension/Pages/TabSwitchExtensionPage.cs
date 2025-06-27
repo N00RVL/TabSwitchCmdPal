@@ -7,19 +7,22 @@ using Microsoft.CommandPalette.Extensions.Toolkit;
 
 namespace TabSwitchExtension;
 
-internal sealed partial class TabSwitchExtensionPage : ListPage
+internal sealed partial class TabSwitchMainPage : ListPage
 {
-    public TabSwitchExtensionPage()
+    public TabSwitchMainPage()
     {
-        Icon = IconHelpers.FromRelativePath("Assets\\StoreLogo.png");
+        Icon = IconHelpers.FromRelativePath("Assets\\logo.png");
         Title = "TabSwitch";
-        Name = "Open";
+        Name = "Main";
     }
 
     public override IListItem[] GetItems()
     {
         return [
-            new ListItem(new NoOpCommand()) { Title = "TODO: Implement your extension here" }
+            new ListItem(new CommandItem(new OpenTabsPage())) { Title = "🔍 Switch to Tab", Subtitle = "Find and switch to any open window" },
+            new ListItem(new CommandItem(new RecentTabsPage())) { Title = "⏰ Recent Tabs", Subtitle = "View recently accessed windows" },
+            new ListItem(new CommandItem(new CloseTabPage())) { Title = "❌ Close Tab", Subtitle = "Close specific windows" },
+            new ListItem(new OpenURLCommand("https://github.com/N00RVL/TabSwitchCmdPal")) { Title = "🔗 GitHub Repository", Subtitle = "View source code and documentation" }
         ];
     }
 }
