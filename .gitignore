@@ -1,0 +1,31 @@
+# Visual Studio / .NET build
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+.vs/
+[Bb]in/
+[Oo]bj/
+*.ncrunch*
+*.local.json
+*.pubxml.user
+
+# MSIX / packaging
+AppPackages/
+*.appx
+*.appxbundle
+*.msix
+*.msixbundle
+*.msixupload
+
+# Logs
+*.log
+TestResult*/
+
+# Rider
+.idea/
+*.iml
+
+# OS
+.DS_Store
+Thumbs.db

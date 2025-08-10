@@ -1,0 +1,9 @@
+{
+  "name": "com.tabswitch.nativehost",
+  "description": "TabSwitch Native Messaging Host",
+  "path": "C:\\Program Files\\TabSwitchExtension\\TabSwitchNativeHost.exe",
+  "type": "stdio",
+  "allowed_origins": [
+    "chrome-extension://tabswitch-extension-id/"
+  ]
+}

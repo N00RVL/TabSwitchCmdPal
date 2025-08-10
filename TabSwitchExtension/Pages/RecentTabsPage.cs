@@ -16,39 +16,89 @@ internal sealed partial class RecentTabsPage : ListPage
         Icon = IconHelpers.FromRelativePath("Assets\\logo.png");
         Title = "Recent Tabs";
         Name = "RecentTabs";
-        IsSearchable = true;
-        SearchPlaceholderText = "Search recent windows...";
     }
 
     public override IListItem[] GetItems()
     {
-        var recentTabs = RecentTabsService.GetRecentTabs();
-        
-        if (!recentTabs.Any())
+        try
         {
+            // Get tabs and history from native host
+            var tabsTask = NativeHostService.GetAllTabsAsync();
+            tabsTask.Wait();
+            var allItems = tabsTask.Result;
+            
+            // Combine recent tabs and history, prioritizing recent activity
+            var recentItems = allItems
+                .Where(item => !string.IsNullOrWhiteSpace(item.Title))
+                .OrderByDescending(item => item.LastAccessed)
+                .Take(20) // Show last 20 items
+                .ToList();
+            
+            if (recentItems.Count == 0)
+            {
+                return [
+                    new ListItem(new NoOpCommand()) 
+                    { 
+                        Title = "No recent tabs or history", 
+                        Subtitle = "Install browser extensions and browse some websites to see them here",
+                        Icon = null
+                    }
+                ];
+            }
+            
+            return recentItems
+                .Select(item => new ListItem(new OpenTabCommand(item))
+                {
+                    Title = item.Title,
+                    Subtitle = GetItemSubtitle(item),
+                    Icon = null
+                })
+                .ToArray();
+        }
+        catch
+        {
+            // Fallback if native host is not available
             return [
                 new ListItem(new NoOpCommand()) 
                 { 
-                    Title = "No recent tabs", 
-                    Subtitle = "Switch to some windows first to see them here",
-                    Icon = IconHelpers.FromSegoeFluentIcon(SegoeFluentIcon.Info)
+                    Title = "Browser extensions not connected", 
+                    Subtitle = "Install and configure browser extensions to see tabs and history",
+                    Icon = null
                 }
             ];
         }
-        
-        return recentTabs
-            .Select((window, index) => new ListItem(new SwitchToWindowCommand(window))
-            {
-                Title = window.Title,
-                Subtitle = $"{window.ProcessName} • {GetRelativeTime(window.LastAccessed)}",
-                Icon = GetProcessIcon(window.ProcessName)
-            })
-            .ToArray();
     }
 
-    private static string GetRelativeTime(DateTime dateTime)
+    private static string GetItemSubtitle(TabInfo item)
     {
-        var timeSpan = DateTime.Now - dateTime;
+        var subtitle = $"{item.Browser}";
+        
+        if (item.Type == "history")
+            subtitle += " • History";
+        else if (item.IsActive)
+            subtitle += " • Active";
+            
+        subtitle += $" • {GetRelativeTime(item.LastAccessed)}";
+        
+        if (!string.IsNullOrEmpty(item.Url))
+        {
+            try
+            {
+                var uri = new System.Uri(item.Url);
+                subtitle += $" • {uri.Host}";
+            }
+            catch
+            {
+                // URL parsing failed, skip adding host
+            }
+        }
+        
+        return subtitle;
+    }
+
+    private static string GetRelativeTime(System.DateTime dateTime)
+    {
+        var timeSpan = System.DateTime.Now - dateTime;
         
         return timeSpan.TotalMinutes switch
         {
@@ -56,20 +106,6 @@ internal sealed partial class RecentTabsPage : ListPage
             < 60 => $"{(int)timeSpan.TotalMinutes}m ago",
             < 1440 => $"{(int)timeSpan.TotalHours}h ago",
             _ => $"{(int)timeSpan.TotalDays}d ago"
-        };
-    }
-
-    private static Icon? GetProcessIcon(string processName)
-    {
-        return processName.ToLower() switch
-        {
-            "chrome" => IconHelpers.FromSegoeFluentIcon(SegoeFluentIcon.Globe),
-            "firefox" => IconHelpers.FromSegoeFluentIcon(SegoeFluentIcon.Globe),
-            "msedge" => IconHelpers.FromSegoeFluentIcon(SegoeFluentIcon.Globe),
-            "notepad" => IconHelpers.FromSegoeFluentIcon(SegoeFluentIcon.Document),
-            "code" => IconHelpers.FromSegoeFluentIcon(SegoeFluentIcon.Code),
-            "explorer" => IconHelpers.FromSegoeFluentIcon(SegoeFluentIcon.Folder),
-            _ => IconHelpers.FromSegoeFluentIcon(SegoeFluentIcon.App)
         };
     }
 }

@@ -9,7 +9,7 @@ using Microsoft.CommandPalette.Extensions;
 
 namespace TabSwitchExtension;
 
-[Guid("ddb3a562-2f2a-4154-aabe-396d5913a311")]
+[Guid("355a3c7f-1fa4-4707-b000-d98aca83b15f")]
 public sealed partial class TabSwitchExtension : IExtension, IDisposable
 {
     private readonly ManualResetEvent _extensionDisposedEvent;

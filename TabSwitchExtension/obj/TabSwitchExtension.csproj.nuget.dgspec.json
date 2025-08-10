@@ -1,21 +1,21 @@
 {
   "format": 1,
   "restore": {
-    "D:\\CmdPalExt\\TabSwitchExtension\\TabSwitchExtension\\TabSwitchExtension.csproj": {}
+    "d:\\CmdPalExt\\TabSwitchExtension\\TabSwitchExtension\\TabSwitchExtension.csproj": {}
   },
   "projects": {
-    "D:\\CmdPalExt\\TabSwitchExtension\\TabSwitchExtension\\TabSwitchExtension.csproj": {
+    "d:\\CmdPalExt\\TabSwitchExtension\\TabSwitchExtension\\TabSwitchExtension.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\CmdPalExt\\TabSwitchExtension\\TabSwitchExtension\\TabSwitchExtension.csproj",
+        "projectUniqueName": "d:\\CmdPalExt\\TabSwitchExtension\\TabSwitchExtension\\TabSwitchExtension.csproj",
         "projectName": "TabSwitchExtension",
-        "projectPath": "D:\\CmdPalExt\\TabSwitchExtension\\TabSwitchExtension\\TabSwitchExtension.csproj",
+        "projectPath": "d:\\CmdPalExt\\TabSwitchExtension\\TabSwitchExtension\\TabSwitchExtension.csproj",
         "packagesPath": "C:\\Users\\-\\.nuget\\packages\\",
-        "outputPath": "D:\\CmdPalExt\\TabSwitchExtension\\TabSwitchExtension\\obj\\",
+        "outputPath": "d:\\CmdPalExt\\TabSwitchExtension\\TabSwitchExtension\\obj\\",
         "projectStyle": "PackageReference",
         "centralPackageVersionsManagementEnabled": true,
         "configFilePaths": [
-          "D:\\CmdPalExt\\TabSwitchExtension\\NuGet.Config",
+          "d:\\CmdPalExt\\TabSwitchExtension\\NuGet.Config",
           "C:\\Users\\-\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
@@ -29,11 +29,6 @@
             "targetAlias": "net9.0-windows10.0.22621.0",
             "projectReferences": {}
           }
-        },
-        "warningProperties": {
-          "warnAsError": [
-            "NU1605"
-          ]
         },
         "restoreAuditProperties": {
           "enableAudit": "true",
@@ -51,20 +46,9 @@
               "version": "[0.2.0, )",
               "versionCentrallyManaged": true
             },
-            "Microsoft.NET.ILLink.Tasks": {
-              "suppressParent": "All",
-              "target": "Package",
-              "version": "[9.0.4, )",
-              "autoReferenced": true
-            },
             "Microsoft.Web.WebView2": {
               "target": "Package",
               "version": "[1.0.2903.40, )",
-              "versionCentrallyManaged": true
-            },
-            "Microsoft.Windows.CsWinRT": {
-              "target": "Package",
-              "version": "[2.2.0, )",
               "versionCentrallyManaged": true
             },
             "Microsoft.WindowsAppSDK": {
@@ -79,7 +63,7 @@
             },
             "System.Text.Json": {
               "target": "Package",
-              "version": "[9.0.3, )",
+              "version": "[9.0.5, )",
               "versionCentrallyManaged": true
             }
           },
@@ -93,7 +77,7 @@
             "Microsoft.WindowsAppSDK": "1.7.250401001",
             "Shmuelie.WinRTServer": "2.1.1",
             "StyleCop.Analyzers": "1.2.0-beta.556",
-            "System.Text.Json": "9.0.3"
+            "System.Text.Json": "9.0.5"
           },
           "imports": [
             "net461",
@@ -109,35 +93,51 @@
           "downloadDependencies": [
             {
               "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[9.0.4, 9.0.4]"
+              "version": "[9.0.5, 9.0.5]"
             },
             {
               "name": "Microsoft.AspNetCore.App.Runtime.win-arm64",
-              "version": "[9.0.4, 9.0.4]"
+              "version": "[9.0.5, 9.0.5]"
             },
             {
               "name": "Microsoft.AspNetCore.App.Runtime.win-x64",
-              "version": "[9.0.4, 9.0.4]"
+              "version": "[9.0.5, 9.0.5]"
+            },
+            {
+              "name": "Microsoft.AspNetCore.App.Runtime.win-x86",
+              "version": "[9.0.5, 9.0.5]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Crossgen2.win-x64",
+              "version": "[9.0.5, 9.0.5]"
             },
             {
               "name": "Microsoft.NETCore.App.Host.win-arm64",
-              "version": "[9.0.4, 9.0.4]"
+              "version": "[9.0.5, 9.0.5]"
             },
             {
               "name": "Microsoft.NETCore.App.Host.win-x64",
-              "version": "[9.0.4, 9.0.4]"
+              "version": "[9.0.5, 9.0.5]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Host.win-x86",
+              "version": "[9.0.5, 9.0.5]"
             },
             {
               "name": "Microsoft.NETCore.App.Ref",
-              "version": "[9.0.4, 9.0.4]"
+              "version": "[9.0.5, 9.0.5]"
             },
             {
               "name": "Microsoft.NETCore.App.Runtime.win-arm64",
-              "version": "[9.0.4, 9.0.4]"
+              "version": "[9.0.5, 9.0.5]"
             },
             {
               "name": "Microsoft.NETCore.App.Runtime.win-x64",
-              "version": "[9.0.4, 9.0.4]"
+              "version": "[9.0.5, 9.0.5]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Runtime.win-x86",
+              "version": "[9.0.5, 9.0.5]"
             },
             {
               "name": "Microsoft.Windows.SDK.NET.Ref",
@@ -145,15 +145,19 @@
             },
             {
               "name": "Microsoft.WindowsDesktop.App.Ref",
-              "version": "[9.0.4, 9.0.4]"
+              "version": "[9.0.5, 9.0.5]"
             },
             {
               "name": "Microsoft.WindowsDesktop.App.Runtime.win-arm64",
-              "version": "[9.0.4, 9.0.4]"
+              "version": "[9.0.5, 9.0.5]"
             },
             {
               "name": "Microsoft.WindowsDesktop.App.Runtime.win-x64",
-              "version": "[9.0.4, 9.0.4]"
+              "version": "[9.0.5, 9.0.5]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Runtime.win-x86",
+              "version": "[9.0.5, 9.0.5]"
             }
           ],
           "frameworkReferences": {
@@ -164,7 +168,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.100-preview.4.25258.110/PortableRuntimeIdentifierGraph.json",
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.100-preview.5.25277.114/PortableRuntimeIdentifierGraph.json",
           "packagesToPrune": {
             "Microsoft.CSharp": "(, 4.7.32767]",
             "Microsoft.NETCore.App": "(, 2.1.32767]",
@@ -461,6 +465,9 @@
           "#import": []
         },
         "win-x64": {
+          "#import": []
+        },
+        "win-x86": {
           "#import": []
         }
       }

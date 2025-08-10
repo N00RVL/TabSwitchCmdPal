@@ -32,12 +32,6 @@
           }
         }
       },
-      "Microsoft.NET.ILLink.Tasks/9.0.4": {
-        "type": "package",
-        "build": {
-          "build/Microsoft.NET.ILLink.Tasks.props": {}
-        }
-      },
       "Microsoft.Web.WebView2/1.0.2903.40": {
         "type": "package",
         "build": {
@@ -240,7 +234,7 @@
           }
         }
       },
-      "System.Text.Json/9.0.3": {
+      "System.Text.Json/9.0.5": {
         "type": "package",
         "compile": {
           "lib/net9.0/System.Text.Json.dll": {
@@ -279,12 +273,6 @@
         "build": {
           "build/Microsoft.CommandPalette.Extensions.props": {},
           "build/Microsoft.CommandPalette.Extensions.targets": {}
-        }
-      },
-      "Microsoft.NET.ILLink.Tasks/9.0.4": {
-        "type": "package",
-        "build": {
-          "build/Microsoft.NET.ILLink.Tasks.props": {}
         }
       },
       "Microsoft.Web.WebView2/1.0.2903.40": {
@@ -448,7 +436,7 @@
           }
         }
       },
-      "System.Text.Json/9.0.3": {
+      "System.Text.Json/9.0.5": {
         "type": "package",
         "compile": {
           "lib/net9.0/System.Text.Json.dll": {
@@ -487,12 +475,6 @@
         "build": {
           "build/Microsoft.CommandPalette.Extensions.props": {},
           "build/Microsoft.CommandPalette.Extensions.targets": {}
-        }
-      },
-      "Microsoft.NET.ILLink.Tasks/9.0.4": {
-        "type": "package",
-        "build": {
-          "build/Microsoft.NET.ILLink.Tasks.props": {}
         }
       },
       "Microsoft.Web.WebView2/1.0.2903.40": {
@@ -656,7 +638,206 @@
           }
         }
       },
-      "System.Text.Json/9.0.3": {
+      "System.Text.Json/9.0.5": {
+        "type": "package",
+        "compile": {
+          "lib/net9.0/System.Text.Json.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net9.0/System.Text.Json.dll": {
+            "related": ".xml"
+          }
+        },
+        "build": {
+          "buildTransitive/net8.0/System.Text.Json.targets": {}
+        }
+      }
+    },
+    "net9.0-windows10.0.22621/win-x86": {
+      "Microsoft.CommandPalette.Extensions/0.2.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Windows.CsWinRT": "2.2.0"
+        },
+        "compile": {
+          "lib/net8.0-windows10.0.19041.0/Microsoft.CommandPalette.Extensions.Toolkit.dll": {
+            "related": ".deps.json"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-windows10.0.19041.0/Microsoft.CommandPalette.Extensions.Toolkit.dll": {
+            "related": ".deps.json"
+          }
+        },
+        "build": {
+          "build/Microsoft.CommandPalette.Extensions.props": {},
+          "build/Microsoft.CommandPalette.Extensions.targets": {}
+        }
+      },
+      "Microsoft.Web.WebView2/1.0.2903.40": {
+        "type": "package",
+        "native": {
+          "runtimes/win-x86/native/WebView2Loader.dll": {}
+        },
+        "build": {
+          "buildTransitive/Microsoft.Web.WebView2.targets": {}
+        }
+      },
+      "Microsoft.Windows.CsWinRT/2.2.0": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0/WinRT.Runtime.dll": {}
+        },
+        "runtime": {
+          "lib/net8.0/WinRT.Runtime.dll": {}
+        },
+        "build": {
+          "build/Microsoft.Windows.CsWinRT.props": {},
+          "build/Microsoft.Windows.CsWinRT.targets": {}
+        }
+      },
+      "Microsoft.Windows.SDK.BuildTools/10.0.22621.756": {
+        "type": "package",
+        "build": {
+          "buildTransitive/Microsoft.Windows.SDK.BuildTools.props": {},
+          "buildTransitive/Microsoft.Windows.SDK.BuildTools.targets": {}
+        }
+      },
+      "Microsoft.WindowsAppSDK/1.7.250401001": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Web.WebView2": "1.0.2903.40",
+          "Microsoft.Windows.SDK.BuildTools": "10.0.22621.756"
+        },
+        "compile": {
+          "lib/net6.0-windows10.0.22621.0/Microsoft.InteractiveExperiences.Projection.dll": {
+            "related": ".xml"
+          },
+          "lib/net6.0-windows10.0.22621.0/Microsoft.Security.Authentication.OAuth.Projection.dll": {},
+          "lib/net6.0-windows10.0.22621.0/Microsoft.WinUI.dll": {
+            "related": ".xml"
+          },
+          "lib/net6.0-windows10.0.22621.0/Microsoft.Windows.AppLifecycle.Projection.dll": {
+            "related": ".xml"
+          },
+          "lib/net6.0-windows10.0.22621.0/Microsoft.Windows.AppNotifications.Builder.Projection.dll": {
+            "related": ".xml"
+          },
+          "lib/net6.0-windows10.0.22621.0/Microsoft.Windows.AppNotifications.Projection.dll": {
+            "related": ".xml"
+          },
+          "lib/net6.0-windows10.0.22621.0/Microsoft.Windows.ApplicationModel.Background.Projection.dll": {},
+          "lib/net6.0-windows10.0.22621.0/Microsoft.Windows.ApplicationModel.DynamicDependency.Projection.dll": {
+            "related": ".xml"
+          },
+          "lib/net6.0-windows10.0.22621.0/Microsoft.Windows.ApplicationModel.Resources.Projection.dll": {
+            "related": ".xml"
+          },
+          "lib/net6.0-windows10.0.22621.0/Microsoft.Windows.ApplicationModel.WindowsAppRuntime.Projection.dll": {
+            "related": ".xml"
+          },
+          "lib/net6.0-windows10.0.22621.0/Microsoft.Windows.BadgeNotifications.Projection.dll": {},
+          "lib/net6.0-windows10.0.22621.0/Microsoft.Windows.Management.Deployment.Projection.dll": {
+            "related": ".xml"
+          },
+          "lib/net6.0-windows10.0.22621.0/Microsoft.Windows.Media.Capture.Projection.dll": {},
+          "lib/net6.0-windows10.0.22621.0/Microsoft.Windows.PushNotifications.Projection.dll": {
+            "related": ".xml"
+          },
+          "lib/net6.0-windows10.0.22621.0/Microsoft.Windows.Security.AccessControl.Projection.dll": {
+            "related": ".xml"
+          },
+          "lib/net6.0-windows10.0.22621.0/Microsoft.Windows.Storage.Projection.dll": {
+            "related": ".xml"
+          },
+          "lib/net6.0-windows10.0.22621.0/Microsoft.Windows.System.Power.Projection.dll": {
+            "related": ".xml"
+          },
+          "lib/net6.0-windows10.0.22621.0/Microsoft.Windows.System.Projection.dll": {
+            "related": ".xml"
+          },
+          "lib/net6.0-windows10.0.22621.0/Microsoft.Windows.Widgets.Projection.dll": {
+            "related": ".xml"
+          },
+          "lib/net6.0-windows10.0.22621.0/Microsoft.WindowsAppRuntime.Bootstrap.Net.dll": {}
+        },
+        "runtime": {
+          "lib/net6.0-windows10.0.22621.0/Microsoft.InteractiveExperiences.Projection.dll": {
+            "related": ".xml"
+          },
+          "lib/net6.0-windows10.0.22621.0/Microsoft.Security.Authentication.OAuth.Projection.dll": {},
+          "lib/net6.0-windows10.0.22621.0/Microsoft.WinUI.dll": {
+            "related": ".xml"
+          },
+          "lib/net6.0-windows10.0.22621.0/Microsoft.Windows.AppLifecycle.Projection.dll": {
+            "related": ".xml"
+          },
+          "lib/net6.0-windows10.0.22621.0/Microsoft.Windows.AppNotifications.Builder.Projection.dll": {
+            "related": ".xml"
+          },
+          "lib/net6.0-windows10.0.22621.0/Microsoft.Windows.AppNotifications.Projection.dll": {
+            "related": ".xml"
+          },
+          "lib/net6.0-windows10.0.22621.0/Microsoft.Windows.ApplicationModel.Background.Projection.dll": {},
+          "lib/net6.0-windows10.0.22621.0/Microsoft.Windows.ApplicationModel.DynamicDependency.Projection.dll": {
+            "related": ".xml"
+          },
+          "lib/net6.0-windows10.0.22621.0/Microsoft.Windows.ApplicationModel.Resources.Projection.dll": {
+            "related": ".xml"
+          },
+          "lib/net6.0-windows10.0.22621.0/Microsoft.Windows.ApplicationModel.WindowsAppRuntime.Projection.dll": {
+            "related": ".xml"
+          },
+          "lib/net6.0-windows10.0.22621.0/Microsoft.Windows.BadgeNotifications.Projection.dll": {},
+          "lib/net6.0-windows10.0.22621.0/Microsoft.Windows.Management.Deployment.Projection.dll": {
+            "related": ".xml"
+          },
+          "lib/net6.0-windows10.0.22621.0/Microsoft.Windows.Media.Capture.Projection.dll": {},
+          "lib/net6.0-windows10.0.22621.0/Microsoft.Windows.PushNotifications.Projection.dll": {
+            "related": ".xml"
+          },
+          "lib/net6.0-windows10.0.22621.0/Microsoft.Windows.Security.AccessControl.Projection.dll": {
+            "related": ".xml"
+          },
+          "lib/net6.0-windows10.0.22621.0/Microsoft.Windows.Storage.Projection.dll": {
+            "related": ".xml"
+          },
+          "lib/net6.0-windows10.0.22621.0/Microsoft.Windows.System.Power.Projection.dll": {
+            "related": ".xml"
+          },
+          "lib/net6.0-windows10.0.22621.0/Microsoft.Windows.System.Projection.dll": {
+            "related": ".xml"
+          },
+          "lib/net6.0-windows10.0.22621.0/Microsoft.Windows.Widgets.Projection.dll": {
+            "related": ".xml"
+          },
+          "lib/net6.0-windows10.0.22621.0/Microsoft.WindowsAppRuntime.Bootstrap.Net.dll": {}
+        },
+        "native": {
+          "runtimes/win-x86/native/Microsoft.Windows.ApplicationModel.Background.UniversalBGTask.dll": {},
+          "runtimes/win-x86/native/Microsoft.WindowsAppRuntime.Bootstrap.dll": {}
+        },
+        "build": {
+          "buildTransitive/Microsoft.WindowsAppSDK.props": {},
+          "buildTransitive/Microsoft.WindowsAppSDK.targets": {}
+        }
+      },
+      "Shmuelie.WinRTServer/2.1.1": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0-windows10.0.22000/Shmuelie.WinRTServer.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-windows10.0.22000/Shmuelie.WinRTServer.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "System.Text.Json/9.0.5": {
         "type": "package",
         "compile": {
           "lib/net9.0/System.Text.Json.dll": {
@@ -692,57 +873,6 @@
         "runtimes/win-arm64/native/Microsoft.CommandPalette.Extensions.dll",
         "runtimes/win-x64/native/Microsoft.CommandPalette.Extensions.dll",
         "winmd/Microsoft.CommandPalette.Extensions.winmd"
-      ]
-    },
-    "Microsoft.NET.ILLink.Tasks/9.0.4": {
-      "sha512": "xUdlUxiFwXhTYhB4VxKg/IA0+jlZXJPo70LYuMryWbJHdonIpZjw+7DO2B0pWwpXIOs6MlH5WVXPEtfrGEcVZA==",
-      "type": "package",
-      "path": "microsoft.net.illink.tasks/9.0.4",
-      "hasTools": true,
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "Icon.png",
-        "LICENSE.TXT",
-        "Sdk/Sdk.props",
-        "THIRD-PARTY-NOTICES.TXT",
-        "analyzers/dotnet/cs/ILLink.CodeFixProvider.dll",
-        "analyzers/dotnet/cs/ILLink.RoslynAnalyzer.dll",
-        "build/Microsoft.NET.ILLink.Analyzers.props",
-        "build/Microsoft.NET.ILLink.Tasks.props",
-        "build/Microsoft.NET.ILLink.targets",
-        "microsoft.net.illink.tasks.9.0.4.nupkg.sha512",
-        "microsoft.net.illink.tasks.nuspec",
-        "tools/net472/ILLink.Tasks.dll",
-        "tools/net472/ILLink.Tasks.dll.config",
-        "tools/net472/Mono.Cecil.Mdb.dll",
-        "tools/net472/Mono.Cecil.Pdb.dll",
-        "tools/net472/Mono.Cecil.Rocks.dll",
-        "tools/net472/Mono.Cecil.dll",
-        "tools/net472/Sdk/Sdk.props",
-        "tools/net472/System.Buffers.dll",
-        "tools/net472/System.Collections.Immutable.dll",
-        "tools/net472/System.Memory.dll",
-        "tools/net472/System.Numerics.Vectors.dll",
-        "tools/net472/System.Reflection.Metadata.dll",
-        "tools/net472/System.Runtime.CompilerServices.Unsafe.dll",
-        "tools/net472/build/Microsoft.NET.ILLink.Analyzers.props",
-        "tools/net472/build/Microsoft.NET.ILLink.Tasks.props",
-        "tools/net472/build/Microsoft.NET.ILLink.targets",
-        "tools/net9.0/ILLink.Tasks.deps.json",
-        "tools/net9.0/ILLink.Tasks.dll",
-        "tools/net9.0/Mono.Cecil.Mdb.dll",
-        "tools/net9.0/Mono.Cecil.Pdb.dll",
-        "tools/net9.0/Mono.Cecil.Rocks.dll",
-        "tools/net9.0/Mono.Cecil.dll",
-        "tools/net9.0/Sdk/Sdk.props",
-        "tools/net9.0/build/Microsoft.NET.ILLink.Analyzers.props",
-        "tools/net9.0/build/Microsoft.NET.ILLink.Tasks.props",
-        "tools/net9.0/build/Microsoft.NET.ILLink.targets",
-        "tools/net9.0/illink.deps.json",
-        "tools/net9.0/illink.dll",
-        "tools/net9.0/illink.runtimeconfig.json",
-        "useSharedDesignerContext.txt"
       ]
     },
     "Microsoft.Web.WebView2/1.0.2903.40": {
@@ -1795,10 +1925,10 @@
         "shmuelie.winrtserver.nuspec"
       ]
     },
-    "System.Text.Json/9.0.3": {
-      "sha512": "r2JRkLjsYrq5Dpo7+y3Wa73OfirZPdVhxiTJWwZ+oJM7FOAe0LkM3GlH+pgkNRdd1G1kwUbmRCdmh4uoaWwu1g==",
+    "System.Text.Json/9.0.5": {
+      "sha512": "rnP61ZfloTgPQPe7ecr36loNiGX3g1PocxlKHdY/FUpDSsExKkTxpMAlB4X35wNEPr1X7mkYZuQvW3Lhxmu7KA==",
       "type": "package",
-      "path": "system.text.json/9.0.3",
+      "path": "system.text.json/9.0.5",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -1861,7 +1991,7 @@
         "lib/net9.0/System.Text.Json.xml",
         "lib/netstandard2.0/System.Text.Json.dll",
         "lib/netstandard2.0/System.Text.Json.xml",
-        "system.text.json.9.0.3.nupkg.sha512",
+        "system.text.json.9.0.5.nupkg.sha512",
         "system.text.json.nuspec",
         "useSharedDesignerContext.txt"
       ]
@@ -1870,12 +2000,10 @@
   "projectFileDependencyGroups": {
     "net9.0-windows10.0.22621": [
       "Microsoft.CommandPalette.Extensions >= 0.2.0",
-      "Microsoft.NET.ILLink.Tasks >= 9.0.4",
       "Microsoft.Web.WebView2 >= 1.0.2903.40",
-      "Microsoft.Windows.CsWinRT >= 2.2.0",
       "Microsoft.WindowsAppSDK >= 1.7.250401001",
       "Shmuelie.WinRTServer >= 2.1.1",
-      "System.Text.Json >= 9.0.3"
+      "System.Text.Json >= 9.0.5"
     ]
   },
   "packageFolders": {
@@ -1884,15 +2012,15 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\CmdPalExt\\TabSwitchExtension\\TabSwitchExtension\\TabSwitchExtension.csproj",
+      "projectUniqueName": "d:\\CmdPalExt\\TabSwitchExtension\\TabSwitchExtension\\TabSwitchExtension.csproj",
       "projectName": "TabSwitchExtension",
-      "projectPath": "D:\\CmdPalExt\\TabSwitchExtension\\TabSwitchExtension\\TabSwitchExtension.csproj",
+      "projectPath": "d:\\CmdPalExt\\TabSwitchExtension\\TabSwitchExtension\\TabSwitchExtension.csproj",
       "packagesPath": "C:\\Users\\-\\.nuget\\packages\\",
-      "outputPath": "D:\\CmdPalExt\\TabSwitchExtension\\TabSwitchExtension\\obj\\",
+      "outputPath": "d:\\CmdPalExt\\TabSwitchExtension\\TabSwitchExtension\\obj\\",
       "projectStyle": "PackageReference",
       "centralPackageVersionsManagementEnabled": true,
       "configFilePaths": [
-        "D:\\CmdPalExt\\TabSwitchExtension\\NuGet.Config",
+        "d:\\CmdPalExt\\TabSwitchExtension\\NuGet.Config",
         "C:\\Users\\-\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
@@ -1906,11 +2034,6 @@
           "targetAlias": "net9.0-windows10.0.22621.0",
           "projectReferences": {}
         }
-      },
-      "warningProperties": {
-        "warnAsError": [
-          "NU1605"
-        ]
       },
       "restoreAuditProperties": {
         "enableAudit": "true",
@@ -1928,20 +2051,9 @@
             "version": "[0.2.0, )",
             "versionCentrallyManaged": true
           },
-          "Microsoft.NET.ILLink.Tasks": {
-            "suppressParent": "All",
-            "target": "Package",
-            "version": "[9.0.4, )",
-            "autoReferenced": true
-          },
           "Microsoft.Web.WebView2": {
             "target": "Package",
             "version": "[1.0.2903.40, )",
-            "versionCentrallyManaged": true
-          },
-          "Microsoft.Windows.CsWinRT": {
-            "target": "Package",
-            "version": "[2.2.0, )",
             "versionCentrallyManaged": true
           },
           "Microsoft.WindowsAppSDK": {
@@ -1956,7 +2068,7 @@
           },
           "System.Text.Json": {
             "target": "Package",
-            "version": "[9.0.3, )",
+            "version": "[9.0.5, )",
             "versionCentrallyManaged": true
           }
         },
@@ -1970,7 +2082,7 @@
           "Microsoft.WindowsAppSDK": "1.7.250401001",
           "Shmuelie.WinRTServer": "2.1.1",
           "StyleCop.Analyzers": "1.2.0-beta.556",
-          "System.Text.Json": "9.0.3"
+          "System.Text.Json": "9.0.5"
         },
         "imports": [
           "net461",
@@ -1986,35 +2098,51 @@
         "downloadDependencies": [
           {
             "name": "Microsoft.AspNetCore.App.Ref",
-            "version": "[9.0.4, 9.0.4]"
+            "version": "[9.0.5, 9.0.5]"
           },
           {
             "name": "Microsoft.AspNetCore.App.Runtime.win-arm64",
-            "version": "[9.0.4, 9.0.4]"
+            "version": "[9.0.5, 9.0.5]"
           },
           {
             "name": "Microsoft.AspNetCore.App.Runtime.win-x64",
-            "version": "[9.0.4, 9.0.4]"
+            "version": "[9.0.5, 9.0.5]"
+          },
+          {
+            "name": "Microsoft.AspNetCore.App.Runtime.win-x86",
+            "version": "[9.0.5, 9.0.5]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Crossgen2.win-x64",
+            "version": "[9.0.5, 9.0.5]"
           },
           {
             "name": "Microsoft.NETCore.App.Host.win-arm64",
-            "version": "[9.0.4, 9.0.4]"
+            "version": "[9.0.5, 9.0.5]"
           },
           {
             "name": "Microsoft.NETCore.App.Host.win-x64",
-            "version": "[9.0.4, 9.0.4]"
+            "version": "[9.0.5, 9.0.5]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Host.win-x86",
+            "version": "[9.0.5, 9.0.5]"
           },
           {
             "name": "Microsoft.NETCore.App.Ref",
-            "version": "[9.0.4, 9.0.4]"
+            "version": "[9.0.5, 9.0.5]"
           },
           {
             "name": "Microsoft.NETCore.App.Runtime.win-arm64",
-            "version": "[9.0.4, 9.0.4]"
+            "version": "[9.0.5, 9.0.5]"
           },
           {
             "name": "Microsoft.NETCore.App.Runtime.win-x64",
-            "version": "[9.0.4, 9.0.4]"
+            "version": "[9.0.5, 9.0.5]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Runtime.win-x86",
+            "version": "[9.0.5, 9.0.5]"
           },
           {
             "name": "Microsoft.Windows.SDK.NET.Ref",
@@ -2022,15 +2150,19 @@
           },
           {
             "name": "Microsoft.WindowsDesktop.App.Ref",
-            "version": "[9.0.4, 9.0.4]"
+            "version": "[9.0.5, 9.0.5]"
           },
           {
             "name": "Microsoft.WindowsDesktop.App.Runtime.win-arm64",
-            "version": "[9.0.4, 9.0.4]"
+            "version": "[9.0.5, 9.0.5]"
           },
           {
             "name": "Microsoft.WindowsDesktop.App.Runtime.win-x64",
-            "version": "[9.0.4, 9.0.4]"
+            "version": "[9.0.5, 9.0.5]"
+          },
+          {
+            "name": "Microsoft.WindowsDesktop.App.Runtime.win-x86",
+            "version": "[9.0.5, 9.0.5]"
           }
         ],
         "frameworkReferences": {
@@ -2041,7 +2173,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.100-preview.4.25258.110/PortableRuntimeIdentifierGraph.json",
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.100-preview.5.25277.114/PortableRuntimeIdentifierGraph.json",
         "packagesToPrune": {
           "Microsoft.CSharp": "(, 4.7.32767]",
           "Microsoft.NETCore.App": "(, 2.1.32767]",
@@ -2338,6 +2470,9 @@
         "#import": []
       },
       "win-x64": {
+        "#import": []
+      },
+      "win-x86": {
         "#import": []
       }
     }

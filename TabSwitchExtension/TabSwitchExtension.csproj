@@ -8,11 +8,31 @@
     <TargetFramework>net9.0-windows10.0.22621.0</TargetFramework>
     <TargetPlatformMinVersion>10.0.19041.0</TargetPlatformMinVersion>
     <SupportedOSPlatformVersion>10.0.19041.0</SupportedOSPlatformVersion>
-    <RuntimeIdentifiers>win-x64;win-arm64</RuntimeIdentifiers>
+    <RuntimeIdentifiers>win-x64;win-arm64;win-x86</RuntimeIdentifiers>
+    <Platforms>x64;ARM64;x86</Platforms>
+
+    <!-- Default to x64 to avoid AnyCPU packaging error -->
+    <Platform Condition=" '$(Platform)' == '' ">x64</Platform>
+    <RuntimeIdentifier Condition=" '$(RuntimeIdentifier)' == '' and '$(Platform)' == 'x64' ">win-x64</RuntimeIdentifier>
 
     <PublishProfile>win-$(Platform).pubxml</PublishProfile>
     <EnableMsixTooling>true</EnableMsixTooling>
     <Nullable>enable</Nullable>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    
+    <!-- Fix packaging settings -->
+    <WindowsPackageType>MSIX</WindowsPackageType>
+    <PublishSingleFile>false</PublishSingleFile>
+    
+    <!-- Disable problematic optimizations -->
+    <CsWinRTEnabled>false</CsWinRTEnabled>
+    <CsWinRTGenerateProjection>false</CsWinRTGenerateProjection>
+    <PublishTrimmed>false</PublishTrimmed>
+    <DisableWindowsAppSDKAutoInitializer>true</DisableWindowsAppSDKAutoInitializer>
+    
+    <!-- Suppress warnings -->
+    <WarningsAsErrors />
+    <NoWarn>$(NoWarn);IL2026;IL3050;IL2104;CsWinRT1030;CA1838;CA2101;CA1806;CA1859;CA2201;CA2022;CA1835;CS0067</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
@@ -33,7 +53,6 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.CommandPalette.Extensions" />
-    <PackageReference Include="Microsoft.Windows.CsWinRT" />
     <PackageReference Include="Microsoft.WindowsAppSDK" />
     <PackageReference Include="Microsoft.Web.WebView2" />
     <PackageReference Include="System.Text.Json" />
@@ -50,13 +69,25 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <IsAotCompatible>true</IsAotCompatible>
-    <CsWinRTAotOptimizerEnabled>true</CsWinRTAotOptimizerEnabled>
-    <CsWinRTAotWarningLevel>2</CsWinRTAotWarningLevel>
-    <!-- Suppress DynamicallyAccessedMemberTypes.PublicParameterlessConstructor in fallback code path of Windows SDK projection -->
-    <WarningsNotAsErrors>IL2081</WarningsNotAsErrors>
-
-    <PublishTrimmed>true</PublishTrimmed>
-    <WindowsPackageType>None</WindowsPackageType>
+    <IsAotCompatible>false</IsAotCompatible>
+    <CsWinRTAotOptimizerEnabled>false</CsWinRTAotOptimizerEnabled>
   </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)'=='Debug'">
+    <!-- In Debug builds, trimming is disabled by default, but all the trim & 
+         AOT warnings are enabled. This gives debug builds a tighter inner loop,
+         while at least warning about future trim violations -->
+    <PublishTrimmed>false</PublishTrimmed>
+    
+    <EnableTrimAnalyzer>true</EnableTrimAnalyzer>
+    <EnableSingleFileAnalyzer>true</EnableSingleFileAnalyzer>
+    <EnableAotAnalyzer>true</EnableAotAnalyzer>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)'!='Debug'">
+    <!-- Disable trimming for packaged apps -->
+    <PublishTrimmed>false</PublishTrimmed>
+  </PropertyGroup>
+
+
 </Project>

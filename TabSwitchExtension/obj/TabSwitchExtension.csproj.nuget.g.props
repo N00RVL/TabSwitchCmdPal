@@ -16,12 +16,10 @@
     <Import Project="$(NuGetPackageRoot)microsoft.windows.sdk.buildtools\10.0.22621.756\buildTransitive\Microsoft.Windows.SDK.BuildTools.props" Condition="Exists('$(NuGetPackageRoot)microsoft.windows.sdk.buildtools\10.0.22621.756\buildTransitive\Microsoft.Windows.SDK.BuildTools.props')" />
     <Import Project="$(NuGetPackageRoot)microsoft.windowsappsdk\1.7.250401001\buildTransitive\Microsoft.WindowsAppSDK.props" Condition="Exists('$(NuGetPackageRoot)microsoft.windowsappsdk\1.7.250401001\buildTransitive\Microsoft.WindowsAppSDK.props')" />
     <Import Project="$(NuGetPackageRoot)microsoft.windows.cswinrt\2.2.0\build\Microsoft.Windows.CsWinRT.props" Condition="Exists('$(NuGetPackageRoot)microsoft.windows.cswinrt\2.2.0\build\Microsoft.Windows.CsWinRT.props')" />
-    <Import Project="$(NuGetPackageRoot)microsoft.net.illink.tasks\9.0.4\build\Microsoft.NET.ILLink.Tasks.props" Condition="Exists('$(NuGetPackageRoot)microsoft.net.illink.tasks\9.0.4\build\Microsoft.NET.ILLink.Tasks.props')" />
     <Import Project="$(NuGetPackageRoot)microsoft.commandpalette.extensions\0.2.0\build\Microsoft.CommandPalette.Extensions.props" Condition="Exists('$(NuGetPackageRoot)microsoft.commandpalette.extensions\0.2.0\build\Microsoft.CommandPalette.Extensions.props')" />
   </ImportGroup>
   <PropertyGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
     <PkgMicrosoft_Web_WebView2 Condition=" '$(PkgMicrosoft_Web_WebView2)' == '' ">C:\Users\-\.nuget\packages\microsoft.web.webview2\1.0.2903.40</PkgMicrosoft_Web_WebView2>
     <PkgMicrosoft_WindowsAppSDK Condition=" '$(PkgMicrosoft_WindowsAppSDK)' == '' ">C:\Users\-\.nuget\packages\microsoft.windowsappsdk\1.7.250401001</PkgMicrosoft_WindowsAppSDK>
-    <PkgMicrosoft_NET_ILLink_Tasks Condition=" '$(PkgMicrosoft_NET_ILLink_Tasks)' == '' ">C:\Users\-\.nuget\packages\microsoft.net.illink.tasks\9.0.4</PkgMicrosoft_NET_ILLink_Tasks>
   </PropertyGroup>
 </Project>

@@ -4,54 +4,33 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace TabSwitchExtension.Services;
 
 public class RecentTabsService
 {
-    private static readonly List<WindowInfo> _recentTabs = new();
-    private const int MaxRecentTabs = 20;
-
-    public static void AddToRecent(WindowInfo window)
+    // Simplified - no recent tracking needed for basic tab opening
+    // Keeping this class for compatibility but with minimal functionality
+    
+    public static void AddToRecent(TabInfo tab)
     {
-        // Remove if already exists
-        _recentTabs.RemoveAll(w => w.Handle == window.Handle);
-        
-        // Add to front
-        _recentTabs.Insert(0, window);
-        
-        // Keep only the most recent
-        while (_recentTabs.Count > MaxRecentTabs)
-        {
-            _recentTabs.RemoveAt(_recentTabs.Count - 1);
-        }
+        // No-op - we're not tracking recent tabs in the simplified version
     }
 
-    public static List<WindowInfo> GetRecentTabs()
+    public static List<TabInfo> GetRecentTabs()
     {
-        // Filter out closed windows
-        var validTabs = new List<WindowInfo>();
-        var allWindows = WindowsApiService.GetOpenWindows();
-        
-        foreach (var recentTab in _recentTabs)
-        {
-            var stillExists = allWindows.Any(w => w.Handle == recentTab.Handle);
-            if (stillExists)
-            {
-                validTabs.Add(recentTab);
-            }
-        }
-        
-        // Update the list to remove closed windows
-        _recentTabs.Clear();
-        _recentTabs.AddRange(validTabs);
-        
-        return validTabs;
+        // Return empty list - no recent tabs in simplified version
+        return new List<TabInfo>();
     }
 
     public static void ClearRecent()
     {
-        _recentTabs.Clear();
+        // No-op - nothing to clear
+    }
+
+    // Overload for backward compatibility with WindowInfo
+    public static void AddToRecent(WindowInfo window)
+    {
+        // No-op - not tracking recent items
     }
 }

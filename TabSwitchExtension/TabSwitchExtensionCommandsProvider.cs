@@ -17,11 +17,14 @@ public partial class TabSwitchExtensionCommandsProvider : CommandProvider
 
     public override ICommandItem[] TopLevelCommands()
     {
-        return [
-            new CommandItem(new TabSwitchMainPage()) { Title = "TabSwitch" },
-            new CommandItem(new OpenTabsPage()) { Title = "Switch to Tab" },
-            new CommandItem(new RecentTabsPage()) { Title = "Recent Tabs" },
-            new CommandItem(new CloseTabPage()) { Title = "Close Tab" },
-        ];
+        // Return exactly one command to ensure no duplicates
+        return new ICommandItem[]
+        {
+            new CommandItem(new OpenTabsPage()) 
+            { 
+                Title = "TabSwitch",
+                Subtitle = "🔄 Quick tab switching (Type 'tab' + Enter for best experience)"
+            }
+        };
     }
 }

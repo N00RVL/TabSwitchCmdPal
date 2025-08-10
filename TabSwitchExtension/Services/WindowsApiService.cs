@@ -24,8 +24,8 @@ public static class WindowsApiService
     [DllImport("user32.dll")]
     private static extern bool EnumWindows(EnumWindowsProc enumProc, IntPtr lParam);
 
-    [DllImport("user32.dll")]
-    private static extern int GetWindowText(IntPtr hWnd, StringBuilder strText, int maxCount);
+    [DllImport("user32.dll", CharSet = CharSet.Unicode)]
+    private static extern int GetWindowText(IntPtr hWnd, [Out] char[] lpString, int nMaxCount);
 
     [DllImport("user32.dll")]
     private static extern int GetWindowTextLength(IntPtr hWnd);
@@ -43,15 +43,16 @@ public static class WindowsApiService
     private static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
 
     [DllImport("user32.dll")]
-    private static extern bool CloseWindow(IntPtr hWnd);
-
-    [DllImport("user32.dll")]
     private static extern IntPtr GetForegroundWindow();
+
+    [DllImport("user32.dll", SetLastError = true)]
+    private static extern bool PostMessage(IntPtr hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
 
     private delegate bool EnumWindowsProc(IntPtr hWnd, IntPtr lParam);
 
     private const int SW_RESTORE = 9;
     private const int SW_SHOW = 5;
+    private const uint WM_CLOSE = 0x0010;
 
     public static List<WindowInfo> GetOpenWindows()
     {
@@ -64,29 +65,33 @@ public static class WindowsApiService
                 int length = GetWindowTextLength(hWnd);
                 if (length > 0)
                 {
-                    var builder = new StringBuilder(length + 1);
-                    GetWindowText(hWnd, builder, builder.Capacity);
+                    var buffer = new char[length + 1];
+                    int result = GetWindowText(hWnd, buffer, buffer.Length);
                     
-                    string title = builder.ToString();
-                    if (!string.IsNullOrWhiteSpace(title))
+                    if (result > 0)
                     {
-                        GetWindowThreadProcessId(hWnd, out uint processId);
+                        string title = new string(buffer, 0, result);
+                        if (!string.IsNullOrWhiteSpace(title))
+                        {
+                            uint processId;
+                            GetWindowThreadProcessId(hWnd, out processId);
                         
-                        try
-                        {
-                            var process = Process.GetProcessById((int)processId);
-                            windows.Add(new WindowInfo
+                            try
                             {
-                                Handle = hWnd,
-                                Title = title,
-                                ProcessName = process.ProcessName,
-                                IsVisible = true,
-                                LastAccessed = DateTime.Now
-                            });
-                        }
-                        catch
-                        {
-                            // Process might have exited, skip it
+                                var process = Process.GetProcessById((int)processId);
+                                windows.Add(new WindowInfo
+                                {
+                                    Handle = hWnd,
+                                    Title = title,
+                                    ProcessName = process.ProcessName,
+                                    IsVisible = true,
+                                    LastAccessed = DateTime.Now
+                                });
+                            }
+                            catch
+                            {
+                                // Process might have exited, skip it
+                            }
                         }
                     }
                 }
@@ -114,7 +119,8 @@ public static class WindowsApiService
     {
         try
         {
-            return CloseWindow(windowHandle);
+            // Send WM_CLOSE to allow the app to shutdown gracefully (prompts to save, etc.)
+            return PostMessage(windowHandle, WM_CLOSE, IntPtr.Zero, IntPtr.Zero);
         }
         catch
         {
