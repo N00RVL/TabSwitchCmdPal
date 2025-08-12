@@ -1,23 +1,15 @@
-# 🔄 TabSwitch - BrowTabSwitch provides a simple way to find and open browser tabs across all your browsers through the Windows Command Palette:
-
-- 🌐 **Cross-Browser Tab Access**: List tabs from Chrome, Firefox, Edge
-- 🔍 **Smart Search**: Quickly find tabs by title or URL
-- ⚡ **One-Click Open**: Select a tab and it opens in the browser
-- 🛡️ **Privacy-First**: All data stays local, no cloud sync
-- 📱 **Simple Interface**: Clean, straightforward designanagement for Windows Command Palette
+# 🔄 TabSwitch Extension for PowerToys Command Palette
 
 <div align="center">
 
-<img src="TabSwitchExtension/Assets/logo.png" alt="TabSwitch Logo" width="256" height="256">
+<img src="TabSwitchExtension/Assets/logo.png" alt="TabSwitch Logo" width="128" height="128">
 
-**A simple Command Palette extension for opening browser tabs in Windows**
+**A Command Palette extension for seamless tab switching in Windows**
 
-[![Version](https://img.shields.io/badge/version-2.0.0-blue.svg)](https://github.com/N00RVL/TabSwitchCmdPal)
+[![Version](https://img.shields.io/badge/version-0.1.0-blue.svg)](#)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
-[![Platform](https://img.shields.io/badge/platform-Windows%2010/11-lightgrey.svg)](https://www.microsoft.com/windows)
-[![.NET](https://img.shields.io/badge/.NET-8.0-purple.svg)](https://dotnet.microsoft.com/)
-
-[🚀 Features](#-features) • [📥 Installation](#-installation) • [🎯 Usage](#-usage) • [🏗️ Architecture](#-architecture) • [🛠️ Development](#-development)
+[![Platform](https://img.shields.io/badge/platform-Windows%2010/11-lightgrey.svg)](#)
+[![PowerToys](https://img.shields.io/badge/PowerToys-Command%20Palette-purple.svg)](#)
 
 </div>
 
@@ -25,189 +17,160 @@
 
 ## ✨ Features
 
-TabSwitch revolutionizes browser tab management by providing unified access to tabs and history across all your browsers through the Windows Command Palette:
+- 🔍 **Instant Tab Search**: Filter open tabs as you type
+- ⚡ **Fast Navigation**: Keyboard-driven tab switching
+- 🎯 **Smart Matching**: Find tabs by title or application name
+- 🔧 **Clean Interface**: Seamlessly integrated with PowerToys Command Palette
+- 🛡️ **Robust Error Handling**: Graceful handling of edge cases
 
-- 🌐 **Universal Tab Access**: List and switch to tabs from Chrome, Firefox, Edge, and other browsers
-- 📚 **Browsing History**: Search through your recent browsing history across all browsers
-- 🔍 **Smart Search**: Quickly find tabs and history by title, URL, or domain
-- ⏰ **Recent Activity**: View recently accessed tabs and websites
-- 🔄 **Cross-Browser**: Works with multiple browsers simultaneously
-- ⚡ **Lightning Fast**: Optimized native messaging for instant results
-- �️ **Privacy-First**: All data stays local, no cloud sync required
+## 🚀 Quick Start
 
-### Components
+### Usage
 
-1. **Browser Extensions** - Installed in each browser to access tab and history data
-2. **Native Messaging Host** - Secure bridge between browser extensions and Windows
-3. **Command Palette Extension** - Windows application providing the unified interface
+1. **Open Command Palette** (`Win + Alt + Space` by default)
+2. **Type "TabSwitch"** or "tab"
+3. **Press Enter** to open the tab list
+4. **Type to filter** tabs in real-time
+5. **Use arrow keys** to navigate
+6. **Press Enter** to switch to selected tab
 
-## 📥 Installation
+### Basic Commands
 
-### Prerequisites
+| Action | Keys |
+|--------|------|
+| Open TabSwitch | Type `TabSwitch` → `Enter` |
+| Search tabs | Type to filter instantly |
+| Navigate | `↑` `↓` arrow keys |
+| Switch to tab | `Enter` |
+| Go back | `Escape` or `Alt + ←` |
 
-- Windows 10 (Build 19041) or Windows 11
-- Command Palette for Windows
-- Supported browsers: Chrome, Firefox, Edge, or Safari
-- Administrator access (for native host installation)
+## 🎯 Current Behavior vs Desired "Files"-like Experience
 
-### Step 1: Install the Command Palette Extension
+### Current Implementation ✅
+- Type "TabSwitch" → Press Enter → Tab list appears
+- Real-time filtering as you type in the tab list
+- Arrow key navigation and Enter to switch
+- Clean, responsive interface
 
-1. Download the latest MSIX package from [GitHub Releases](https://github.com/N00RVL/TabSwitchCmdPal/releases)
-2. Install the package (may require enabling sideloading)
-3. The extension will appear in your Command Palette
+### Desired "Files"-like Behavior ⏳
+- Type "tab" → **Instant activation** (no Enter required)
+- Direct search/filtering as you continue typing
+- Backspace navigation to return to keyword
+- Exactly like built-in "files" command
 
-### Step 2: Install the Native Messaging Host
+## 🔬 Technical Insights
 
-```powershell
-# Open PowerShell as Administrator
-cd NativeHost
-.\install.bat
+### PowerToys Command Palette Extension Limitations
+
+After extensive analysis of the PowerToys source code, we discovered that **built-in commands** like "files" use internal APIs that are **not available to extensions**:
+
+- **DirectCommand interface**: Not exposed to extensions
+- **Instant activation**: Reserved for core commands
+- **Backspace navigation**: Internal message passing only
+- **Extension API constraints**: Security and stability limitations
+
+### Architecture Analysis
+
+```mermaid
+graph TD
+    A[Command Palette Core] --> B[Built-in Commands]
+    A --> C[Extension API]
+    B --> D[Files Command<br/>Instant Activation]
+    C --> E[TabSwitch Extension<br/>Enter Required]
+    
+    style D fill:#e1f5fe
+    style E fill:#fff3e0
 ```
 
-This installs the secure bridge between browsers and Windows.
+### Code Quality & Features ✅
 
-### Step 3: Install Browser Extensions
+Our extension implements:
+- **Clean architecture** with proper separation of concerns
+- **Async tab enumeration** with robust error handling
+- **Real-time filtering** within the extension page
+- **Professional UI/UX** with icons and placeholder text
+- **Cross-platform builds** (x64, x86, ARM64)
+- **Zero build warnings** across all configurations
 
-#### Chrome/Edge
+## 📈 Future Roadmap
 
-1. Navigate to `chrome://extensions/` (or `edge://extensions/`)
-2. Enable "Developer mode"
-3. Click "Load unpacked"
-4. Select the `BrowserExtensions\Chrome` folder
-5. Note the extension ID for configuration
+### Option 1: Upstream Feature Request ⭐ **Recommended**
+We've prepared a comprehensive feature request for the PowerToys team to add DirectCommand support to the Extension API. This would enable true "files"-like behavior for all extensions.
 
-#### Firefox
+**Status**: [Feature request prepared](FEATURE_REQUEST.md) - Ready for submission
 
-1. Navigate to `about:debugging#/runtime/this-firefox`
-2. Click "Load Temporary Add-on"
-3. Select `manifest.json` in `BrowserExtensions\Firefox`
-
-### Step 4: Configuration
-
-Update extension IDs in native host manifests:
-- `NativeHost\chrome_native_manifest.json`
-- `NativeHost\firefox_native_manifest.json`
-
-Restart browsers to complete setup.
-
-## 🎯 Usage
-
-### Simple Tab Opening
-
-1. **Open Command Palette** (`Win + R` or your configured hotkey)
-2. **Type "Open Tab"** or just "tab"
-3. **Search** by page title or URL
-4. **Press Enter** to open the selected tab in its browser
-
-### Search Tips
-
-- 🎯 **By Title**: `"Gmail"`, `"GitHub"`, `"Documentation"`
-- 🌐 **By URL**: `"localhost:3000"`, `"admin.example.com"`
-- ⚡ **Instant Results**: Start typing and see tabs filtered immediately
-
-## 🔧 Configuration
-
-### Browser Extension Settings
-
-Access via extension popup in each browser:
-
-- **Tab Collection**: Enable/disable automatic enumeration
-- **History Depth**: Control how much history is accessible
-- **Update Frequency**: Set sync interval
-- **Privacy Settings**: Exclude private/incognito tabs
-
-### Native Host Configuration
-
-Edit configuration files as needed:
-
-- **Logging**: Control debug output level
-- **Memory**: Set cache limits
-- **Security**: Configure browser permissions
+### Option 2: Alternative Solutions
+While waiting for upstream changes:
+- Enhanced keyword recognition patterns
+- Improved user guidance and tooltips
+- Performance optimizations
+- Additional tab management features
 
 ## 🛠️ Development
 
 ### Building from Source
 
 ```powershell
-# Clone repository
-git clone https://github.com/N00RVL/TabSwitchCmdPal.git
-cd TabSwitchCmdPal
-
-# Build Command Palette Extension
+# Clone and navigate
+git clone https://github.com/your-repo/TabSwitchExtension.git
 cd TabSwitchExtension
+
+# Restore dependencies
 dotnet restore
-dotnet build --configuration Release
-dotnet publish
 
-# Build Native Host
-cd ../NativeHost
+# Build (choose configuration)
 dotnet build --configuration Release
-dotnet publish -c Release -r win-x64 --self-contained
+dotnet build --configuration Debug
 
-# Browser extensions require no build step
+# Package for deployment
+dotnet publish --configuration Release
 ```
 
-### APIs and Technologies
+### Project Structure
 
-- **Command Palette**: Microsoft.CommandPalette.Extensions
-- **Native Messaging**: Chrome/Firefox native messaging protocols
-- **Browser APIs**: `chrome.tabs`, `chrome.history`, `browser.tabs`, `browser.history`
-- **.NET 8.0**: Modern C# with native Windows integration
-
-## 🔒 Privacy & Security
-
-TabSwitch is designed with privacy as a core principle:
-
-- 🏠 **Local Only**: All data remains on your machine
-- 🚫 **No Cloud Sync**: No external data transmission
-- 🔐 **Secure Channels**: Encrypted native messaging
-- 🎭 **Permission-Based**: Only accesses explicitly granted data
-- 👤 **Private Browsing**: Incognito/private data excluded by default
-
-## 🐛 Troubleshooting
-
-### Common Issues
-
-**Extension Not Responding**
-- Verify native host installation: Check Windows Registry
-- Ensure browser extensions are enabled
-- Restart browsers after installation
-
-**No Tabs Visible**
-- Check browser extension permissions
-- Review native host logs in `%TEMP%\tabswitch_host.log`
-- Verify extension IDs match manifests
-
-**Performance Issues**
-- Reduce history range in extension settings
-- Clear cached data using Command Palette
-- Update to latest version
-
-### Debug Information
-
-```powershell
-# Check native host installation
-reg query "HKLM\SOFTWARE\Google\Chrome\NativeMessagingHosts\com.tabswitch.nativehost"
-
-# View logs
-type "%TEMP%\tabswitch_host.log"
-
-# Test native host directly
-cd NativeHost
-.\TabSwitchNativeHost.exe
+```
+TabSwitchExtension/
+├── TabSwitchExtension/           # Main extension project
+│   ├── Pages/                    # UI pages (OpenTabsPage)
+│   ├── Commands/                 # Command implementations
+│   ├── Services/                 # Tab enumeration service
+│   ├── Assets/                   # Icons and resources
+│   └── *.cs                      # Core extension files
+├── NativeHost/                   # Native tab enumeration
+├── register-cmdpal-extension.ps1 # Registration script
+└── TabSwitchExtension.sln       # Solution file
 ```
 
-### Priority Areas
+### Key Components
 
-- 🌍 Additional browser support (Safari, Opera, Brave)
-- 🎨 Enhanced UI/UX improvements
-- ⚡ Performance optimizations
-- 🔧 Additional tab management features
-- ♿ Accessibility enhancements
+- **`TabSwitchExtensionCommandsProvider`**: Main entry point
+- **`OpenTabsPage`**: Primary tab list interface
+- **`TabEnumerationService`**: Native tab discovery
+- **`DummyCommand`**: Error state handling
+
+## 🤔 FAQ
+
+### Why can't TabSwitch work exactly like the "files" command?
+
+The PowerToys Command Palette has different APIs for built-in commands vs extensions. Built-in commands can activate instantly, but extensions must go through the standard workflow (keyword → Enter → page).
+
+### Will this limitation be fixed?
+
+We're advocating for enhanced Extension API capabilities. The PowerToys team is responsive to well-reasoned feature requests, especially when backed by technical analysis.
+
+### Is the current experience still useful?
+
+Absolutely! While it requires one extra Enter keypress, TabSwitch still provides fast, keyboard-driven tab switching with real-time filtering - a significant productivity improvement.
 
 ## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🙏 Acknowledgments
+
+- **PowerToys Team** for the extensible Command Palette architecture
+- **Microsoft** for the comprehensive extension documentation
+- **Community** for feedback and testing
 
 ---
 
@@ -215,6 +178,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ⭐ **Star this repo if you find it useful!** ⭐
 
-**Note**: Full functionality requires browser extension installation. Without extensions, TabSwitch provides basic window enumeration as a fallback.
+[Report Issues](https://github.com/your-repo/TabSwitchExtension/issues) • [Feature Requests](https://github.com/your-repo/TabSwitchExtension/discussions) • [Contributing Guide](CONTRIBUTING.md)
 
 </div>
