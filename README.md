@@ -69,19 +69,6 @@ After extensive analysis of the PowerToys source code, we discovered that **buil
 - **Backspace navigation**: Internal message passing only
 - **Extension API constraints**: Security and stability limitations
 
-### Architecture Analysis
-
-```mermaid
-graph TD
-    A[Command Palette Core] --> B[Built-in Commands]
-    A --> C[Extension API]
-    B --> D[Files Command<br/>Instant Activation]
-    C --> E[TabSwitch Extension<br/>Enter Required]
-    
-    style D fill:#e1f5fe
-    style E fill:#fff3e0
-```
-
 ### Code Quality & Features ✅
 
 Our extension implements:
