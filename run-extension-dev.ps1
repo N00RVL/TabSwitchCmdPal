@@ -4,6 +4,9 @@
 Write-Host "Starting TabSwitch Extension in Development Mode..." -ForegroundColor Green
 Write-Host ""
 
+$scriptRoot = Split-Path -Parent $MyInvocation.MyCommand.Path
+Set-Location $scriptRoot
+
 # Build the extension first
 Write-Host "Building extension..." -ForegroundColor Yellow
 $buildResult = dotnet build "TabSwitchExtension\TabSwitchExtension.csproj" -c Release -p:Platform=x64
@@ -13,9 +16,11 @@ if ($LASTEXITCODE -ne 0) {
 }
 
 # Check if the executable exists
-$exePath = "TabSwitchExtension\bin\x64\Release\net9.0-windows10.0.22000.0\win-x64\TabSwitchExtension.exe"
+$exePath = Get-ChildItem -Path "TabSwitchExtension\bin\x64\Release" -Filter "TabSwitchExtension.exe" -Recurse -ErrorAction SilentlyContinue |
+    Sort-Object LastWriteTime -Descending |
+    Select-Object -First 1 -ExpandProperty FullName
 if (-not (Test-Path $exePath)) {
-    Write-Host "Extension executable not found at: $exePath" -ForegroundColor Red
+    Write-Host "Extension executable not found under TabSwitchExtension\bin\x64\Release" -ForegroundColor Red
     exit 1
 }
 

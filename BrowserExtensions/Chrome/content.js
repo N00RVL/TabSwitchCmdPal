@@ -1,8 +1,7 @@
-// Content script for TabSwitch - monitors page changes
+
 (function() {
   'use strict';
 
-  // Track page metadata for better tab identification
   let pageInfo = {
     title: document.title,
     url: window.location.href,
@@ -11,10 +10,8 @@
     keywords: getPageKeywords()
   };
 
-  // Send initial page info
   sendPageInfo();
 
-  // Monitor title changes
   const titleObserver = new MutationObserver((mutations) => {
     mutations.forEach((mutation) => {
       if (mutation.type === 'childList' && document.title !== pageInfo.title) {
@@ -29,7 +26,6 @@
     subtree: true
   });
 
-  // Monitor URL changes (for SPAs)
   let currentUrl = window.location.href;
   setInterval(() => {
     if (window.location.href !== currentUrl) {
@@ -62,10 +58,10 @@
     });
   }
 
-  // Listen for messages from background script
   chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     if (message.action === 'getPageInfo') {
       sendResponse(pageInfo);
     }
   });
 })();
+

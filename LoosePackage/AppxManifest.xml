@@ -12,8 +12,7 @@
     Name="TabSwitchExtension"
     Publisher="CN=N00RVL"
     Version="0.0.2.0" />
-  <!-- When you're ready to publish your extension, you'll need to change the
-       Publisher= to match your own identity -->
+  
 
   <Properties>
     <DisplayName>TabSwitch</DisplayName>
@@ -32,8 +31,8 @@
 
   <Applications>
     <Application Id="App"
-      Executable="$targetnametoken$.exe"
-      EntryPoint="$targetentrypoint$">
+      Executable="TabSwitchExtension.exe"
+      EntryPoint="TabSwitchExtension.App">
       <uap:VisualElements
         DisplayName="TabSwitch"
         Description="TabSwitch"
@@ -78,3 +77,4 @@
     <rescap:Capability Name="runFullTrust" />
   </Capabilities>
 </Package>
+

@@ -4,6 +4,9 @@
 Write-Host "🔍 TabSwitch Extension - Final Verification" -ForegroundColor Green
 Write-Host "===========================================" -ForegroundColor Green
 
+$scriptRoot = Split-Path -Parent $MyInvocation.MyCommand.Path
+Set-Location $scriptRoot
+
 # Check if extension is registered
 $package = Get-AppxPackage -Name "TabSwitchExtension"
 if ($package) {
@@ -19,8 +22,10 @@ if ($package) {
 }
 
 # Check if executable exists
-$exePath = "D:\CmdPalExt\TabSwitchExtension\TabSwitchExtension\bin\x64\Release\net9.0-windows10.0.22000.0\win-x64\TabSwitchExtension.exe"
-if (Test-Path $exePath) {
+$exePath = Get-ChildItem -Path "TabSwitchExtension\bin\x64\Release" -Filter "TabSwitchExtension.exe" -Recurse -ErrorAction SilentlyContinue |
+    Sort-Object LastWriteTime -Descending |
+    Select-Object -First 1 -ExpandProperty FullName
+if ($exePath -and (Test-Path $exePath)) {
     Write-Host "✅ Extension Executable: Found" -ForegroundColor Green
     Write-Host "   Path: $exePath" -ForegroundColor White
 } else {
@@ -28,8 +33,10 @@ if (Test-Path $exePath) {
 }
 
 # Check if native host is installed
-$nativeHostPath = "D:\CmdPalExt\TabSwitchExtension\NativeHost\bin\x64\Release\net9.0-windows\win-x64\TabSwitchNativeHost.exe"
-if (Test-Path $nativeHostPath) {
+$nativeHostPath = Get-ChildItem -Path "NativeHost\bin\Release" -Filter "TabSwitchNativeHost.exe" -Recurse -ErrorAction SilentlyContinue |
+    Sort-Object LastWriteTime -Descending |
+    Select-Object -First 1 -ExpandProperty FullName
+if ($nativeHostPath -and (Test-Path $nativeHostPath)) {
     Write-Host "✅ Native Host Executable: Found" -ForegroundColor Green
     Write-Host "   Path: $nativeHostPath" -ForegroundColor White
 } else {
@@ -38,7 +45,7 @@ if (Test-Path $nativeHostPath) {
 
 # Check Chrome native messaging host registry
 try {
-    $chromeReg = Get-ItemProperty -Path "HKCU:\SOFTWARE\Google\Chrome\NativeMessagingHosts\com.tabswitch.host" -ErrorAction SilentlyContinue
+    $chromeReg = Get-ItemProperty -Path "HKCU:\SOFTWARE\Google\Chrome\NativeMessagingHosts\com.tabswitch.nativehost" -ErrorAction SilentlyContinue
     if ($chromeReg) {
         Write-Host "✅ Chrome Native Messaging Host: Registered" -ForegroundColor Green
         Write-Host "   Path: $($chromeReg.'(default)')" -ForegroundColor White
@@ -51,7 +58,7 @@ try {
 
 # Check Firefox native messaging host registry
 try {
-    $firefoxReg = Get-ItemProperty -Path "HKCU:\SOFTWARE\Mozilla\NativeMessagingHosts\com.tabswitch.host" -ErrorAction SilentlyContinue
+    $firefoxReg = Get-ItemProperty -Path "HKCU:\SOFTWARE\Mozilla\NativeMessagingHosts\com.tabswitch.nativehost" -ErrorAction SilentlyContinue
     if ($firefoxReg) {
         Write-Host "✅ Firefox Native Messaging Host: Registered" -ForegroundColor Green
         Write-Host "   Path: $($firefoxReg.'(default)')" -ForegroundColor White
@@ -63,19 +70,19 @@ try {
 }
 
 # Check browser extension files
-$chromeExtPath = "D:\CmdPalExt\TabSwitchExtension\BrowserExtensions\Chrome\manifest.json"
-$firefoxExtPath = "D:\CmdPalExt\TabSwitchExtension\BrowserExtensions\Firefox\manifest.json"
+$chromeExtPath = Join-Path $scriptRoot "BrowserExtensions\Chrome\manifest.json"
+$firefoxExtPath = Join-Path $scriptRoot "BrowserExtensions\Firefox\manifest.json"
 
 if (Test-Path $chromeExtPath) {
     Write-Host "✅ Chrome Extension Files: Found" -ForegroundColor Green
-    Write-Host "   Path: D:\CmdPalExt\TabSwitchExtension\BrowserExtensions\Chrome" -ForegroundColor White
+    Write-Host "   Path: $(Split-Path $chromeExtPath -Parent)" -ForegroundColor White
 } else {
     Write-Host "❌ Chrome extension files not found" -ForegroundColor Red
 }
 
 if (Test-Path $firefoxExtPath) {
     Write-Host "✅ Firefox Extension Files: Found" -ForegroundColor Green
-    Write-Host "   Path: D:\CmdPalExt\TabSwitchExtension\BrowserExtensions\Firefox" -ForegroundColor White
+    Write-Host "   Path: $(Split-Path $firefoxExtPath -Parent)" -ForegroundColor White
 } else {
     Write-Host "❌ Firefox extension files not found" -ForegroundColor Red
 }

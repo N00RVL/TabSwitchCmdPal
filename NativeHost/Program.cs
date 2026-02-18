@@ -34,7 +34,7 @@ namespace TabSwitchNativeHost
             }
         }
 
-        private static async Task ProcessMessagesAsync(Stream stdiln, Stream stdout, string logPath)
+        private static async Task ProcessMessagesAsync(Stream stdin, Stream stdout, string logPath)
         {
             var buffer = new byte[4];
 

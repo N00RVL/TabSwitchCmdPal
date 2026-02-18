@@ -3,6 +3,9 @@
 
 Write-Host "Installing TabSwitch Extension..." -ForegroundColor Green
 
+$scriptRoot = Split-Path -Parent $MyInvocation.MyCommand.Path
+Set-Location $scriptRoot
+
 # Check if developer mode is enabled
 $devModeKey = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\AppModelUnlock"
 $devMode = $false
@@ -17,7 +20,14 @@ if ($devMode -eq 1) {
     Write-Host "Developer mode is enabled. Installing MSIX package..." -ForegroundColor Green
     
     # Install the MSIX package
-    $msixPath = "TabSwitchExtension\bin\x64\Release\net9.0-windows10.0.22000.0\win-x64\AppPackages\TabSwitchExtension_0.0.1.0_x64_Test\TabSwitchExtension_0.0.1.0_x64.msix"
+    $msix = Get-ChildItem -Path "TabSwitchExtension\bin" -Filter "*.msix" -Recurse -ErrorAction SilentlyContinue |
+        Sort-Object LastWriteTime -Descending |
+        Select-Object -First 1
+    if (-not $msix) {
+        Write-Host "No MSIX package found under TabSwitchExtension\bin. Build/package the app first." -ForegroundColor Red
+        exit 1
+    }
+    $msixPath = $msix.FullName
     
     try {
         Add-AppxPackage -Path $msixPath -AllowUnsigned
@@ -28,7 +38,7 @@ if ($devMode -eq 1) {
         Write-Host "Trying alternative installation method..." -ForegroundColor Yellow
         
         # Alternative: Install dependencies first
-        $depsPath = "TabSwitchExtension\bin\x64\Release\net9.0-windows10.0.22000.0\win-x64\AppPackages\TabSwitchExtension_0.0.1.0_x64_Test\Dependencies\x64"
+        $depsPath = Join-Path (Split-Path $msixPath -Parent) "Dependencies\x64"
         if (Test-Path $depsPath) {
             Get-ChildItem -Path $depsPath -Filter "*.appx" | ForEach-Object {
                 try {

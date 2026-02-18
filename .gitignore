@@ -12,6 +12,7 @@
 
 # MSIX / packaging
 AppPackages/
+Build/
 *.appx
 *.appxbundle
 *.msix
@@ -29,3 +30,6 @@ TestResult*/
 # OS
 .DS_Store
 Thumbs.db
+
+# Local scratch/backup folders
+.comment_backups_*/

@@ -37,6 +37,10 @@
 
   <ItemGroup>
     <Content Include="Assets\logo.png" />
+    <Content Include="Public\**\*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <PackagePath>Public\%(RecursiveDir)%(Filename)%(Extension)</PackagePath>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>

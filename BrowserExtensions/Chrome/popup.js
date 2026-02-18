@@ -1,4 +1,4 @@
-// Popup script for TabSwitch Chrome Extension
+
 document.addEventListener('DOMContentLoaded', function() {
     const statusElement = document.getElementById('status');
     const tabCountElement = document.getElementById('tabCount');
@@ -6,18 +6,16 @@ document.addEventListener('DOMContentLoaded', function() {
     const refreshTabsBtn = document.getElementById('refreshTabs');
     const testConnectionBtn = document.getElementById('testConnection');
 
-    // Initialize popup
     updateStatus();
     updateTabCount();
 
-    // Event listeners
     openCmdPaletteBtn.addEventListener('click', openCommandPalette);
     refreshTabsBtn.addEventListener('click', refreshTabs);
     testConnectionBtn.addEventListener('click', testConnection);
 
     async function updateStatus() {
         try {
-            // Check if background script is responding
+
             const response = await chrome.runtime.sendMessage({action: 'ping'});
             
             if (response && response.status === 'ok') {
@@ -52,8 +50,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function openCommandPalette() {
-        // This would ideally trigger the Command Palette
-        // For now, show instructions
+
         alert('Press Win+R and type "TabSwitch" to open in Command Palette');
     }
 
@@ -62,7 +59,7 @@ document.addEventListener('DOMContentLoaded', function() {
         refreshTabsBtn.textContent = 'Refreshing...';
         
         try {
-            // Send refresh command to background script
+
             await chrome.runtime.sendMessage({action: 'refreshTabs'});
             await updateTabCount();
             
@@ -119,6 +116,6 @@ document.addEventListener('DOMContentLoaded', function() {
         return text.substring(0, maxLength - 3) + '...';
     }
 
-    // Refresh status every 5 seconds
     setInterval(updateStatus, 5000);
 });
+

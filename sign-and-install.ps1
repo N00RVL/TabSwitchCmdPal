@@ -3,6 +3,9 @@
 
 Write-Host "Signing and Installing TabSwitch Extension..." -ForegroundColor Green
 
+$scriptRoot = Split-Path -Parent $MyInvocation.MyCommand.Path
+Set-Location $scriptRoot
+
 # Check if certificate exists
 $cert = Get-ChildItem -Path 'Cert:\CurrentUser\My' | Where-Object { $_.Subject -eq 'CN=TabSwitchExtension' } | Select-Object -First 1
 
@@ -26,7 +29,14 @@ catch {
 }
 
 # Sign the MSIX package using SignTool
-$msixPath = "TabSwitchExtension\bin\x64\Release\net9.0-windows10.0.22000.0\win-x64\AppPackages\TabSwitchExtension_0.0.1.0_x64_Test\TabSwitchExtension_0.0.1.0_x64.msix"
+$msix = Get-ChildItem -Path "TabSwitchExtension\bin" -Filter "*.msix" -Recurse -ErrorAction SilentlyContinue |
+    Sort-Object LastWriteTime -Descending |
+    Select-Object -First 1
+if (-not $msix) {
+    Write-Host "No MSIX package found under TabSwitchExtension\bin. Build/package the app first." -ForegroundColor Red
+    exit 1
+}
+$msixPath = $msix.FullName
 
 # Find SignTool.exe
 $signToolPaths = @(

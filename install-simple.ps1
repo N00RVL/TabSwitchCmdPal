@@ -1,6 +1,11 @@
 Write-Host "=== TabSwitch Extension Installation ===" -ForegroundColor Green
 Write-Host ""
 
+$scriptRoot = Split-Path -Parent $MyInvocation.MyCommand.Path
+Set-Location $scriptRoot
+$chromeFolder = Join-Path $scriptRoot "BrowserExtensions\Chrome"
+$firefoxManifest = Join-Path $scriptRoot "BrowserExtensions\Firefox\manifest.json"
+
 # 1. Install Native Host
 Write-Host "1. Installing Native Host..." -ForegroundColor Yellow
 & "Setup\install.ps1"
@@ -33,8 +38,8 @@ Write-Host ""
 Write-Host "NEXT STEPS:" -ForegroundColor Yellow
 Write-Host ""
 Write-Host "1. Install Browser Extensions:" -ForegroundColor White
-Write-Host "   Chrome: chrome://extensions/ -> Load unpacked -> BrowserExtensions/Chrome" -ForegroundColor Gray
-Write-Host "   Firefox: about:debugging -> Load Temporary Add-on -> BrowserExtensions/Firefox/manifest.json" -ForegroundColor Gray
+Write-Host "   Chrome: chrome://extensions/ -> Load unpacked -> $chromeFolder" -ForegroundColor Gray
+Write-Host "   Firefox: about:debugging -> Load Temporary Add-on -> $firefoxManifest" -ForegroundColor Gray
 Write-Host ""
 Write-Host "2. Run the Extension:" -ForegroundColor White
 Write-Host "   Run: .\run-extension-dev.ps1" -ForegroundColor Gray

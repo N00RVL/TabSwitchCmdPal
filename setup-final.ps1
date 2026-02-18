@@ -4,6 +4,11 @@
 Write-Host "=== TabSwitch Extension Installation ===" -ForegroundColor Green
 Write-Host ""
 
+$scriptRoot = Split-Path -Parent $MyInvocation.MyCommand.Path
+Set-Location $scriptRoot
+$chromeFolder = Join-Path $scriptRoot "BrowserExtensions\Chrome"
+$firefoxManifest = Join-Path $scriptRoot "BrowserExtensions\Firefox\manifest.json"
+
 # 1. Install Native Host
 Write-Host "1. Installing Native Host..." -ForegroundColor Yellow
 try {
@@ -36,7 +41,7 @@ catch {
 Write-Host ""
 Write-Host "3. Verifying Installation..." -ForegroundColor Yellow
 $chromeNativeHost = "$env:LOCALAPPDATA\Google\Chrome\User Data\NativeMessagingHosts\com.tabswitch.nativehost.json"
-$firefoxNativeHost = "$env:LOCALAPPDATA\Mozilla\NativeMessagingHosts\com.tabswitch.nativehost.json"
+$firefoxNativeHost = "$env:APPDATA\Mozilla\NativeMessagingHosts\com.tabswitch.nativehost.json"
 
 if (Test-Path $chromeNativeHost) {
     Write-Host "✓ Native Host registered for Chrome" -ForegroundColor Green
@@ -75,13 +80,13 @@ Write-Host "   Chrome:" -ForegroundColor Cyan
 Write-Host "   - Open chrome://extensions/" -ForegroundColor Gray
 Write-Host "   - Enable 'Developer mode'" -ForegroundColor Gray
 Write-Host "   - Click 'Load unpacked'" -ForegroundColor Gray
-Write-Host "   - Select: D:\CmdPalExt\TabSwitchExtension\BrowserExtensions\Chrome" -ForegroundColor Gray
+Write-Host "   - Select: $chromeFolder" -ForegroundColor Gray
 Write-Host ""
 Write-Host "   Firefox:" -ForegroundColor Cyan
 Write-Host "   - Open about:debugging" -ForegroundColor Gray
 Write-Host "   - Click 'This Firefox'" -ForegroundColor Gray
 Write-Host "   - Click 'Load Temporary Add-on'" -ForegroundColor Gray
-Write-Host "   - Select: D:\CmdPalExt\TabSwitchExtension\BrowserExtensions\Firefox\manifest.json" -ForegroundColor Gray
+Write-Host "   - Select: $firefoxManifest" -ForegroundColor Gray
 Write-Host ""
 
 Write-Host "2. Install Command Palette Extension:" -ForegroundColor White
@@ -90,7 +95,7 @@ Write-Host "   - Run: .\run-extension-dev.ps1" -ForegroundColor Gray
 Write-Host ""
 Write-Host "   Option B - Install as MSIX (if you have a code signing certificate):" -ForegroundColor Cyan
 Write-Host "   - Sign the MSIX package with your certificate" -ForegroundColor Gray
-Write-Host "   - Install using: Add-AppxPackage -Path '...\TabSwitchExtension_0.0.1.0_x64.msix'" -ForegroundColor Gray
+Write-Host "   - Install using: Add-AppxPackage -Path '<latest .msix from TabSwitchExtension\\bin>'" -ForegroundColor Gray
 Write-Host ""
 
 Write-Host "3. Test the Extension:" -ForegroundColor White

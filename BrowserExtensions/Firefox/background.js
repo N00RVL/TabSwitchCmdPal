@@ -1,4 +1,4 @@
-// Background script for TabSwitch Firefox Extension
+
 class TabSwitchBridge {
   constructor() {
     this.nativePort = null;
@@ -17,7 +17,7 @@ class TabSwitchBridge {
       this.nativePort.onDisconnect.addListener(() => {
         console.log('Native messaging disconnected:', browser.runtime.lastError);
         this.nativePort = null;
-        // Attempt to reconnect after 5 seconds
+
         setTimeout(() => this.connectToNativeApp(), 5000);
       });
 
@@ -28,14 +28,13 @@ class TabSwitchBridge {
   }
 
   setupListeners() {
-    // Listen for tab updates
+
     browser.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
       if (changeInfo.status === 'complete') {
         this.sendTabUpdate(tab);
       }
     });
 
-    // Listen for tab creation/removal
     browser.tabs.onCreated.addListener((tab) => {
       this.sendTabUpdate(tab);
     });
@@ -44,7 +43,6 @@ class TabSwitchBridge {
       this.sendTabRemoved(tabId);
     });
 
-    // Listen for tab activation
     browser.tabs.onActivated.addListener((activeInfo) => {
       browser.tabs.get(activeInfo.tabId).then((tab) => {
         this.sendTabActivated(tab);
@@ -108,7 +106,7 @@ class TabSwitchBridge {
       const historyItems = await browser.history.search({
         text: query,
         maxResults: maxResults,
-        startTime: Date.now() - (30 * 24 * 60 * 60 * 1000) // Last 30 days
+        startTime: Date.now() - (30 * 24 * 60 * 60 * 1000)
       });
 
       const historyData = historyItems.map(item => ({
@@ -236,5 +234,5 @@ class TabSwitchBridge {
   }
 }
 
-// Initialize the bridge
 const tabSwitchBridge = new TabSwitchBridge();
+
